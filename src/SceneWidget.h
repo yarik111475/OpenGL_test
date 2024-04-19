@@ -9,9 +9,13 @@ class SceneWidget : public QOpenGLWidget,protected QOpenGLFunctions
 {
     Q_OBJECT
 private:
-    GLfloat leftRed_ {1.0};
-    GLfloat leftGreen_ {1.0};
-    GLfloat leftBlue_ {1.0};
+    GLfloat leftRed_ {1.0f};
+    GLfloat leftGreen_ {0.0f};
+    GLfloat leftBlue_ {0.0f};
+
+    GLfloat rightRed_ {1.0f};
+    GLfloat rightGreen_ {0.0f};
+    GLfloat rightBlue_ {0.0f};
 
     GLfloat red_  {};
     GLfloat green_ {};
@@ -36,6 +40,7 @@ public:
     virtual ~SceneWidget()=default;
 public slots:
     void setLeftColorSlot(float red,float green,float blue);
+    void setRightColorSlot(float red,float green,float blue);
     void setRotationEnabledSlot(bool enable);
     void setRotationAxisSlot(const QString& axis);
     void setFigureColorSlot(double red,double green, double blue);

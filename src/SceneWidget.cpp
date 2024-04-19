@@ -14,7 +14,7 @@ GLuint SceneWidget::createPyramid(GLfloat size)
             glVertex3f(0.0, size, 0.0);
             glVertex3f(-size, -size, size);
             glVertex3f(size, -size, size);
-            glColor4f(1.0f, 1.0f, 0.0f, 1.0f);
+            glColor4f(rightRed_, rightGreen_, rightBlue_, 1.0f);
             glVertex3f(size, -size, -size);
             glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
             glVertex3f(-size, -size, -size);
@@ -129,6 +129,16 @@ void SceneWidget::setLeftColorSlot(float red, float green, float blue)
     leftRed_=red;
     leftGreen_=green;
     leftBlue_=blue;
+    pyramidDisplayNumber_=createPyramid(1.0f);
+    timer_.start();
+}
+
+void SceneWidget::setRightColorSlot(float red, float green, float blue)
+{
+    timer_.stop();
+    rightRed_=red;
+    rightGreen_=green;
+    rightBlue_=blue;
     pyramidDisplayNumber_=createPyramid(1.0f);
     timer_.start();
 }

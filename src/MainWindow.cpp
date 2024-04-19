@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
                      sceneWidgetPtr_,&SceneWidget::setRotationEnabledSlot);
     QObject::connect(controlWidgetPtr_,&ControlWidget::setLeftColorSignal,
                      sceneWidgetPtr_,&SceneWidget::setLeftColorSlot);
+    QObject::connect(controlWidgetPtr_,&ControlWidget::setRightColorSignal,
+                     sceneWidgetPtr_,&SceneWidget::setRightColorSlot);
     auto hboxLayoutPtr {new QHBoxLayout};
     hboxLayoutPtr->addWidget(controlWidgetPtr_);
     hboxLayoutPtr->addWidget(sceneWidgetPtr_);

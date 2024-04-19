@@ -62,13 +62,31 @@ ControlWidget::ControlWidget(QWidget *parent)
     QGroupBox* leftColorGroupBoxPtr {new QGroupBox("Left")};
     leftColorGroupBoxPtr->setLayout(leftColorVBoxLayoutPtr);
 
+    QRadioButton* rightRedRButtonPtr {new QRadioButton("Color on Red")};
+    rightRedRButtonPtr->setChecked(true);
+    QRadioButton* rightGreenRButtonPtr {new QRadioButton("Color on Green")};
+    QRadioButton* rightBlueRButtonPtr {new QRadioButton("Color on Blue")};
+
+    QButtonGroup* rightColorButtonGroupPtr {new QButtonGroup};
+    QObject::connect(rightColorButtonGroupPtr,
+                     QOverload<int, bool>::of(&QButtonGroup::buttonToggled),
+                     this,&ControlWidget::rightColorToggledSlot);
+    rightColorButtonGroupPtr->setExclusive(true);
+    rightColorButtonGroupPtr->addButton(rightRedRButtonPtr,0);
+    rightColorButtonGroupPtr->addButton(rightGreenRButtonPtr,1);
+    rightColorButtonGroupPtr->addButton(rightBlueRButtonPtr,2);
+
+    QVBoxLayout* rightColorVBoxLayoutPtr {new QVBoxLayout};
+    rightColorVBoxLayoutPtr->addWidget(rightRedRButtonPtr);
+    rightColorVBoxLayoutPtr->addWidget(rightGreenRButtonPtr);
+    rightColorVBoxLayoutPtr->addWidget(rightBlueRButtonPtr);
+
     QGroupBox* rightColorGroupBoxPtr {new QGroupBox("Right")};
-    QGroupBox* bottomColorGroupBoxPtr {new QGroupBox("Bottom")};
+    rightColorGroupBoxPtr->setLayout(rightColorVBoxLayoutPtr);
 
     QVBoxLayout* colorVBoxLayoutPtr {new QVBoxLayout};
     colorVBoxLayoutPtr->addWidget(leftColorGroupBoxPtr);
     colorVBoxLayoutPtr->addWidget(rightColorGroupBoxPtr);
-    colorVBoxLayoutPtr->addWidget(bottomColorGroupBoxPtr);
 
     QGroupBox* colorGroupBoxPtr {new QGroupBox("Color")};
     colorGroupBoxPtr->setLayout(colorVBoxLayoutPtr);
@@ -90,6 +108,19 @@ void ControlWidget::leftColorToggledSlot(int id, bool checked)
     }
     else if(id==2){
         emit setLeftColorSignal(0.0,0.0,1.0);
+    }
+}
+
+void ControlWidget::rightColorToggledSlot(int id, bool checked)
+{
+    if(id==0){
+        emit setRightColorSignal(1.0,0.0,0.0);
+    }
+    else if(id==1){
+        emit setRightColorSignal(0.0,1.0,0.0);
+    }
+    else if(id==2){
+        emit setRightColorSignal(0.0,0.0,1.0);
     }
 }
 

@@ -18,8 +18,10 @@ signals:
     void setRotationAxisSignal(const QString& axis);
     void setRotationEnabledSignal(bool enable);
     void setLeftColorSignal(float red,float green,float blue);
+    void setRightColorSignal(float red,float green,float blue);
 private slots:
     void leftColorToggledSlot(int id,bool checked);
+    void rightColorToggledSlot(int id,bool checked);
     void rotationToggledSlot(int id,bool checked);
     void startButtonClickedSlot();
     void finishButtonClickedSlot();
